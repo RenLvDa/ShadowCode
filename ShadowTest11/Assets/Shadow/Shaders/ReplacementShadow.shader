@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Taecg/ReplacementShadow"
+﻿Shader "ShadowSystem/ReplacementShadow"
 {
 	SubShader
 	{

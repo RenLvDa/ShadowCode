@@ -2,7 +2,7 @@
 
 // Upgrade NOTE: replaced '_Projector' with 'unity_Projector'
 
-Shader "Taecg/Projector/ProjectorShadow"
+Shader "ShadowSystem/ProjectorShadow"
 {
 	Properties
 	{
@@ -13,7 +13,7 @@ Shader "Taecg/Projector/ProjectorShadow"
 
 	SubShader
 	{
-		Tags{ "Queue" = "AlphaTest+1" }
+		Tags{ "Queue" = "AlphaTest+1" "RenderType" = "Opaque"}
 
 		Pass
 		{
@@ -60,7 +60,7 @@ Shader "Taecg/Projector/ProjectorShadow"
 
 				UNITY_APPLY_FOG_COLOR(i.fogCoord, c, fixed4(1,1,1,1));
 
-				return    c;
+				return c;
 			}
 
 			ENDCG

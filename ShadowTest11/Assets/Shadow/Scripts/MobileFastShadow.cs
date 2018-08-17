@@ -70,7 +70,7 @@ public class MobileFastShadow : MonoBehaviour
 		projector.orthographic = true;
 		projector.orthographicSize = ProjectionSize;
 		projector.aspectRatio = Size.x / Size.y;
-		shadowMat = new Material (Shader.Find ("Taecg/Projector/ProjectorShadow"));
+		shadowMat = new Material (Shader.Find ("ShadowSystem/ProjectorShadow"));
 		projector.material = shadowMat;
 		shadowMat.SetTexture ("_FalloffTex", FalloffTex);
 		shadowMat.SetFloat ("_Intensity", Intensity);
