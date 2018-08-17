@@ -12,6 +12,7 @@ public class ShadowShaderReplacement : MonoBehaviour
 	void OnEnable ()
 	{
 		mCam = GetComponent<Camera> ();
+		replacementShader = Shader.Find ("ShadowSystem/ReplacementShadow");
 		if (replacementShader != null) {
 			mCam.SetReplacementShader (replacementShader, "RenderType");
 		}
