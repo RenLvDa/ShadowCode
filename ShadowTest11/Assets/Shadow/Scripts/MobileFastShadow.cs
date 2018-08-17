@@ -65,6 +65,9 @@ public class MobileFastShadow : MonoBehaviour
 		//默认阴影质量低
 		RTAntiAliasing = AntiAliasing.Samples2;
 
+		//设置衰减
+		FalloffTex = (Texture2D) Resources.Load("Texture/shadow_falloff");
+
 		//projector初始化
 		projector = GetComponent<Projector> ();
 		if (projector == null)
