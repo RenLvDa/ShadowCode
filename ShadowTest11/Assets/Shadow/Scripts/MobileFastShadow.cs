@@ -9,8 +9,7 @@ public class MobileFastShadow : MonoBehaviour
 {
 	public static MobileFastShadow Instance;
 	[Header ("v1.05")]
-	// [Header("Follow Target")]
-        public GameObject FollowTarget;
+    public GameObject FollowTarget;
 
 	[Header ("Shadow Layer")]
 	[Tooltip (" It is used to identify which objects need to cast shadows.")]
@@ -18,6 +17,7 @@ public class MobileFastShadow : MonoBehaviour
 	[Tooltip ("It is used to identify which objects need to receive shadows.")]
 	public LayerMask LayerIgnoreReceiver;
 
+	//抗锯齿
 	public enum AntiAliasing
 	{
 		None = 1,
@@ -62,6 +62,8 @@ public class MobileFastShadow : MonoBehaviour
 		if (FollowTarget == null) {
 			Debug.LogWarning ("Please specify the target to follow！");
 		}
+		//默认阴影质量低
+		RTAntiAliasing = AntiAliasing.Samples2;
 
 		//projector初始化
 		projector = GetComponent<Projector> ();
@@ -111,7 +113,7 @@ public class MobileFastShadow : MonoBehaviour
 	}
 
 	//设置层次
-	public void SetLayer (List<String> LayerCasterList, List<String> LayerIgnoreReceiverList)
+	public void SetLayer (List<string> LayerCasterList, List<string> LayerIgnoreReceiverList)
 	{
 		//LayerCaster
 		for (int i = 0; i < LayerCasterList.Count; i++) {
@@ -129,6 +131,34 @@ public class MobileFastShadow : MonoBehaviour
 		}
 		LayerIgnoreReceiver = ~(LayerIgnoreReceiver);
 		projector.ignoreLayers = LayerIgnoreReceiver;
+	}
+
+
+	//设置阴影质量
+	public enum ShadowQuality
+	{
+		Low,
+		Middle,
+		High,
+	}
+
+	public void SelectShadowQuality (ShadowQuality quality)
+	{
+		switch (quality) {
+		case ShadowQuality.Low:
+			RTAntiAliasing = AntiAliasing.Samples2;
+			break;
+		case ShadowQuality.Middle:
+			RTAntiAliasing = AntiAliasing.Samples4;
+			break;
+		case ShadowQuality.High:
+			RTAntiAliasing = AntiAliasing.Samples8;
+			break;
+		default:
+			Debug.LogError ("ShadowQuality Parameter Error!");
+			break;
+		}
+		shadowRT.antiAliasing = (int)RTAntiAliasing;
 	}
     
 }
