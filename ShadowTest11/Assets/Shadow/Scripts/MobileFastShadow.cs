@@ -141,18 +141,23 @@ public class MobileFastShadow : MonoBehaviour
 		Middle,
 		High,
 	}
-
 	public void SelectShadowQuality (ShadowQuality quality)
 	{
 		switch (quality) {
 		case ShadowQuality.Low:
 			RTAntiAliasing = AntiAliasing.Samples2;
+			shadowRT.width = 1024;
+			shadowRT.height = 1024;
 			break;
 		case ShadowQuality.Middle:
 			RTAntiAliasing = AntiAliasing.Samples4;
+			shadowRT.width = 2048;
+			shadowRT.height = 2048;
 			break;
 		case ShadowQuality.High:
 			RTAntiAliasing = AntiAliasing.Samples8;
+			shadowRT.width = 4096;
+			shadowRT.height = 4096;
 			break;
 		default:
 			Debug.LogError ("ShadowQuality Parameter Error!");
